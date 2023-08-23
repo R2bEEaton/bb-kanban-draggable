@@ -95,18 +95,21 @@
 
 <div on:drop={handleDrop}>
     <div class="spectrum-Table">
-        <div class="spectrum-Table-head">
-            {#each Object.keys(reactiveTableStatuses[0]) as keyname, index}
-                <div class="spectrum-Table-headCell">
-                    <div class="title">
-                        {keyname}
+        <div class="spectrum-Table-head svelte-rzhjll">
+                <div class="spectrum-Table-headCell svelte-rzhjll">
+                    <div class="title svelte-rzhjll">
+                        Title
                     </div>
                 </div>
-            {/each}
+                <div class="spectrum-Table-headCell svelte-rzhjll">
+                    <div class="title svelte-rzhjll">
+                        Order
+                    </div>
+                </div>
         </div>
         {#each reactiveTableStatuses as status, index}
             <div
-                    class="spectrum-Table-row"
+                    class="spectrum-Table-row svelte-rzhjll"
                     draggable="true"
                     on:dragstart={(event) => handleDragStart(event, index)}
                     on:dragover={(event) => handleDragOver(event, index)}
@@ -115,11 +118,20 @@
                         dropIndex = null;
                     }}
             >
-                {#each Object.values(status) as value, index}
-                    <div class="spectrum-Table-cell">
-                        {value}
+                <div class="spectrum-Table-cell svelte-rzhjll">
+                    <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
+                        <div class="svelte-1acrdjg">
+                            {status.Title}
+                        </div>
                     </div>
-                {/each}
+                </div>
+                <div class="spectrum-Table-cell svelte-rzhjll">
+                    <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
+                        <div class="svelte-1acrdjg">
+                            {status.Order}
+                        </div>
+                    </div>
+                </div>
             </div>
         {/each}
     </div>
