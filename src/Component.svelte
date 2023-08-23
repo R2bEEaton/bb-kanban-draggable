@@ -5,11 +5,11 @@
 
     const { API, notificationStore } = getContext('sdk');
 
-    export let table;
+    export let dataProvider;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
-    const statusTableId = table?.tableId;
+    const statusTableId = dataProvider?.datasource.tableId;
     $: reactiveTableStatuses = tableStatuses;
 
     async function fetchTables() {
@@ -70,10 +70,10 @@
 
     onMount(() => {
         // define a Promise that resolves when the variable is populated
-        function waitForVariable(table) {
+        function waitForVariable(dataProvider) {
             return new Promise(function (resolve) {
                 var checkVariable = function () {
-                    if (table) {
+                    if (dataProvider) {
                         resolve();
                     } else {
                         setTimeout(checkVariable, 100); // check variable every 100ms
@@ -83,7 +83,7 @@
             });
         }
         // wait for the variable to become populated, then run the process
-        waitForVariable(table)
+        waitForVariable(dataProvider)
             .then(function () {
                 fetchTables();
             })
