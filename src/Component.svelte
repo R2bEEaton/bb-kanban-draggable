@@ -38,6 +38,7 @@
     async function refreshColumns(input) {
         try {
             const promises = input.map((status, index) => {
+                console.log(status, index);
                 return API.saveRow({
                     ...status,
                     Order: index + 1,
@@ -52,6 +53,7 @@
             );
             await fetchTables();
         } catch (error) {
+            console.log(error);
         }
     }
     async function handleDrop(event) {
@@ -61,7 +63,7 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            refreshColumns(reactiveTableStatuses.detail);
+            refreshColumns(tableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
