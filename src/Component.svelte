@@ -37,7 +37,7 @@
 
     async function refreshColumns(input) {
         try {
-            const promises = input.map((status, index) => {
+            const promises = input.reverse().map((status, index) => {
                 return API.saveRow({
                     ...status,
                     Order: index + 1,
