@@ -18,7 +18,7 @@
             const data = await API.fetchTableData(statusTableId);
             tableStatuses = data;
             if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
-                tableStatuses.sort((a, b) => a.Order - b.Order);
+                tableStatuses.sort((a, b) => b.Order - a.Order);
             }
         } catch (error) {
             console.log("SOME ERROR");
@@ -48,7 +48,7 @@
             await Promise.all(promises);
             await fetchTables();
             notificationStore.actions.success(
-                `Your column orders have been successfully rearranged.`
+                `Your list has been successfully rearranged.`
             );
             await fetchTables();
         } catch (error) {
@@ -62,7 +62,7 @@
                 tableStatuses.splice(dragIndex, 1)[0]
             );
             refreshColumns(reactiveTableStatuses);
-            console.log(reactiveTableStatuses);
+            //console.log(reactiveTableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
@@ -115,7 +115,7 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {status.Title} {status.Order}
+                    {status.Title}
                 </div>
             </div>
         {/each}
