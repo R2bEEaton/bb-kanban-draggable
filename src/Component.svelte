@@ -1,14 +1,13 @@
 <script>
     import { getContext, createEventDispatcher } from 'svelte';
 
-    export let tableStatuses;
     const dispatch = createEventDispatcher();
 
     const { API, notificationStore } = getContext('sdk');
 
     let dragIndex = null;
     let dropIndex = null;
-    $: reactiveTableStatuses = tableStatuses;
+    $: reactiveTableStatuses = ['test1', 'test2'];
 
     function handleDragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';

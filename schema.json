@@ -15,45 +15,10 @@
     },
     "settings": [
       {
-        "type": "text",
-        "key": "title",
-        "label": "Title"
-      },
-      {
-        "type": "number",
-        "label": "Card widths",
-        "key": "CardWidths",
-        "defaultValue": 300,
-        "min": 300
-      },
-      {
         "type": "dataProvider",
         "label": "Provider",
         "key": "dataProvider",
         "required": true
-      },
-      {
-        "type": "field",
-        "label": "Relationship Field",
-        "key": "kanbanCardTitles",
-        "dependsOn": "dataProvider",
-        "required": true
-      },
-      {
-        "type": "table",
-        "key": "table",
-        "label": "Relationship table"
-      },
-      {
-        "type": "event",
-        "label": "On Click",
-        "key": "onClick",
-        "context": [
-          {
-            "label": "Card ID",
-            "key": "cardId"
-          }
-        ]
       }
     ]
   }
