@@ -116,7 +116,7 @@
                 >
                     {#each status as value, index}
                         <div class="spectrum-Table-cell">
-                            {status.value}
+                            {value}
                         </div>
                     {/each}
                 </div>
