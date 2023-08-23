@@ -94,46 +94,52 @@
 </script>
 
 <div on:drop={handleDrop}>
-    <div class="spectrum-Table">
-        <div class="spectrum-Table-head svelte-rzhjll">
-                <div class="spectrum-Table-headCell svelte-rzhjll">
-                    <div class="title svelte-rzhjll">
-                        Title
+    <div class="component c94ae0a4dc5ed47428446c717c05e2f5a svelte-4sybt1 parent" data-id="c94ae0a4dc5ed47428446c717c05e2f5a" data-name="New Table" data-icon="Table" data-parent="cf31e6a91c9334617b4d18c77b97a0df9">
+        <div class="spectrum--medium svelte-9e4ofs c94ae0a4dc5ed47428446c717c05e2f5a-dom" draggable="false" style="">
+            <div class="wrapper svelte-rzhjll" style="--row-height: 55px; --header-height: 36px;">
+                <div class="spectrum-Table svelte-rzhjll" style="grid-template-columns: minmax(auto, 1fr) minmax(auto, 1fr) minmax(auto, 1fr);">
+                    <div class="spectrum-Table-head svelte-rzhjll">
+                            <div class="spectrum-Table-headCell svelte-rzhjll">
+                                <div class="title svelte-rzhjll">
+                                    Title
+                                </div>
+                            </div>
+                            <div class="spectrum-Table-headCell svelte-rzhjll">
+                                <div class="title svelte-rzhjll">
+                                    Order
+                                </div>
+                            </div>
                     </div>
-                </div>
-                <div class="spectrum-Table-headCell svelte-rzhjll">
-                    <div class="title svelte-rzhjll">
-                        Order
-                    </div>
-                </div>
-        </div>
-        {#each reactiveTableStatuses as status, index}
-            <div
-                    class="spectrum-Table-row svelte-rzhjll"
-                    draggable="true"
-                    on:dragstart={(event) => handleDragStart(event, index)}
-                    on:dragover={(event) => handleDragOver(event, index)}
-                    on:dragend={() => {
-                        dragIndex = null;
-                        dropIndex = null;
-                    }}
-            >
-                <div class="spectrum-Table-cell svelte-rzhjll">
-                    <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
-                        <div class="svelte-1acrdjg">
-                            {status.Title}
+                    {#each reactiveTableStatuses as status, index}
+                        <div
+                                class="spectrum-Table-row svelte-rzhjll"
+                                draggable="true"
+                                on:dragstart={(event) => handleDragStart(event, index)}
+                                on:dragover={(event) => handleDragOver(event, index)}
+                                on:dragend={() => {
+                                    dragIndex = null;
+                                    dropIndex = null;
+                                }}
+                        >
+                            <div class="spectrum-Table-cell svelte-rzhjll">
+                                <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
+                                    <div class="svelte-1acrdjg">
+                                        {status.Title}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spectrum-Table-cell svelte-rzhjll">
+                                <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
+                                    <div class="svelte-1acrdjg">
+                                        {status.Order}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="spectrum-Table-cell svelte-rzhjll">
-                    <div class="svelte-16j2cvj" style="--max-cell-width: 200px;">
-                        <div class="svelte-1acrdjg">
-                            {status.Order}
-                        </div>
-                    </div>
+                    {/each}
                 </div>
             </div>
-        {/each}
+        </div>
     </div>
 </div>
 
