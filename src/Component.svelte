@@ -7,7 +7,9 @@
 
     let dragIndex = null;
     let dropIndex = null;
-    $: reactiveTableStatuses = ['test1', 'test2'];
+    export let tableStatuses;
+    tableStatuses = ['test1', 'test2', 'test3'];
+    $: reactiveTableStatuses = tableStatuses;
 
     function handleDragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
@@ -25,7 +27,7 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            dispatch('tableStatusesUpdated', reactiveTableStatuses);
+            //dispatch('tableStatusesUpdated', reactiveTableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
