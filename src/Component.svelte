@@ -96,13 +96,13 @@
 <div on:drop={handleDrop}>
     <div class="spectrum-Table">
         <div class="spectrum-Table-head">
-            <!--{#each Object.keys(reactiveTableStatuses[0]) as keyname}
+            {#each Object.keys(reactiveTableStatuses[0]) as keyname, index}
                 <div class="spectrum-Table-headCell">
                     <div class="title">
                         {keyname}
                     </div>
                 </div>
-            {/each}-->
+            {/each}
             {#each reactiveTableStatuses as status, index}
                 <div
                         class="spectrum-Table-row"
