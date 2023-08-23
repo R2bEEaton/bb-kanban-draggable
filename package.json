@@ -1,7 +1,7 @@
 {
-  "name": "bb-kanban-draggable",
-  "version": "1.2.5",
-  "description": "Dragable Kanban cards area allowing for status changes.",
+  "name": "bb-list-draggable",
+  "version": "1.0.0",
+  "description": "A draggable list that allows for on-the-fly reordering.",
   "license": "MIT",
   "svelte": "index.js",
   "module": "dist/plugin.min.js",
