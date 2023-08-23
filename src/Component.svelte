@@ -18,7 +18,6 @@
             tableStatuses = data;
             if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
                 tableStatuses.sort((a, b) => a.Order - b.Order);
-                console.log("sorted");
             }
             console.log(tableStatuses);
         } catch (error) {
@@ -39,7 +38,6 @@
     async function refreshColumns(input) {
         try {
             const promises = input.map((status, index) => {
-                console.log(status, index);
                 return API.saveRow({
                     ...status,
                     Order: index + 1,
@@ -54,7 +52,6 @@
             );
             await fetchTables();
         } catch (error) {
-            console.log(error);
         }
     }
     async function handleDrop(event) {
@@ -64,9 +61,7 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            console.log("First " + reactiveTableStatuses);
-            console.log("Second " + tableStatuses);
-            refreshColumns(reactiveTableStatuses);
+            refreshColumns(tableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
