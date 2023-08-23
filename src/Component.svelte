@@ -19,7 +19,6 @@
             if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
                 tableStatuses.sort((a, b) => a.Order - b.Order);
             }
-            console.log(tableStatuses);
         } catch (error) {
             console.log("SOME ERROR");
         }
@@ -94,20 +93,33 @@
 </script>
 
 <div on:drop={handleDrop}>
-    {#each reactiveTableStatuses as status, index}
-        <div
-        class="status-item spectrum-Card-content"
-        draggable="true"
-        on:dragstart={(event) => handleDragStart(event, index)}
-        on:dragover={(event) => handleDragOver(event, index)}
-        on:dragend={() => {
-            dragIndex = null;
-            dropIndex = null;
-        }}
-        >
-            {status.Title}
+    <div class="spectrum-Table">
+        <div class="spectrum-Table-head">
+            <div class="spectrum-Table-headCell">
+                <div class="title">
+                    {#each reactiveTableStatuses as status, index}
+                        {status.Title}
+                    {/each}
+                </div>
+            </div>
+            {#each reactiveTableStatuses as status, index}
+                <div
+                        class="spectrum-Table-row"
+                        draggable="true"
+                        on:dragstart={(event) => handleDragStart(event, index)}
+                        on:dragover={(event) => handleDragOver(event, index)}
+                        on:dragend={() => {
+                            dragIndex = null;
+                            dropIndex = null;
+                        }}
+                >
+                    <div class="spectrum-Table-cell">
+                        {status.Title}
+                    </div>
+                </div>
+            {/each}
         </div>
-    {/each}
+    </div>
 </div>
 
 <style>
