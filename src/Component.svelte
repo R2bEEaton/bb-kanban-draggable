@@ -103,25 +103,25 @@
                     </div>
                 </div>
             {/each}
-            {#each reactiveTableStatuses as status, index}
-                <div
-                        class="spectrum-Table-row"
-                        draggable="true"
-                        on:dragstart={(event) => handleDragStart(event, index)}
-                        on:dragover={(event) => handleDragOver(event, index)}
-                        on:dragend={() => {
-                            dragIndex = null;
-                            dropIndex = null;
-                        }}
-                >
-                    {#each Object.values(status) as value, index}
-                        <div class="spectrum-Table-cell">
-                            {value}
-                        </div>
-                    {/each}
-                </div>
-            {/each}
         </div>
+        {#each reactiveTableStatuses as status, index}
+            <div
+                    class="spectrum-Table-row"
+                    draggable="true"
+                    on:dragstart={(event) => handleDragStart(event, index)}
+                    on:dragover={(event) => handleDragOver(event, index)}
+                    on:dragend={() => {
+                        dragIndex = null;
+                        dropIndex = null;
+                    }}
+            >
+                {#each Object.values(status) as value, index}
+                    <div class="spectrum-Table-cell">
+                        {value}
+                    </div>
+                {/each}
+            </div>
+        {/each}
     </div>
 </div>
 
