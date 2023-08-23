@@ -1,15 +1,29 @@
 <script>
-    import { getContext, createEventDispatcher } from 'svelte';
+    import { getContext, createEventDispatcher, onMount } from 'svelte';
 
     const dispatch = createEventDispatcher();
 
     const { API, notificationStore } = getContext('sdk');
 
+    export let table;
     let dragIndex = null;
     let dropIndex = null;
-    export let tableStatuses;
-    tableStatuses = [{Title: 'test1'}, {Title: 'test2'}, {Title: 'test3'}];
+    let tableStatuses = [];
+    const statusTableId = table?.tableId;
     $: reactiveTableStatuses = tableStatuses;
+
+    async function fetchTables() {
+        try {
+            const data = await API.fetchTableData(statusTableId);
+            tableStatuses = data;
+            if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
+                tableStatuses.sort((a, b) => a.Order - b.Order);
+            }
+            console.log(tableStatuses);
+        } catch (error) {
+            console.log("SOME ERROR");
+        }
+    }
 
     function handleDragStart(event, index) {
       event.dataTransfer.effectAllowed = 'move';
@@ -20,6 +34,26 @@
         if (index === dragIndex) return;
         dropIndex = index;
     }
+
+    async function refreshColumns(input) {
+        try {
+            const promises = input.map((status, index) => {
+                return API.saveRow({
+                    ...status,
+                    Order: index + 1,
+                }).catch((error) => {
+                    console.error(error);
+                });
+            });
+            await Promise.all(promises);
+            await fetchTables();
+            notificationStore.actions.success(
+                `Your column orders have been successfully rearranged.`
+            );
+            await fetchTables();
+        } catch (error) {
+        }
+    }
     async function handleDrop(event) {
         if (dragIndex !== null && dropIndex !== null) {
             tableStatuses.splice(
@@ -27,12 +61,36 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            dispatch('tableStatusesUpdated', reactiveTableStatuses);
+            refreshColumns(reactiveTableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
         dropIndex = null;
     }
+
+    onMount(() => {
+        // define a Promise that resolves when the variable is populated
+        function waitForVariable(table) {
+            return new Promise(function (resolve) {
+                var checkVariable = function () {
+                    if (table) {
+                        resolve();
+                    } else {
+                        setTimeout(checkVariable, 100); // check variable every 100ms
+                    }
+                };
+                checkVariable();
+            });
+        }
+        // wait for the variable to become populated, then run the process
+        waitForVariable(table)
+            .then(function () {
+                fetchTables();
+            })
+            .catch(function (err) {
+                console.log(err); // logging the error to the console.
+            });
+    });
 </script>
 
 <div on:drop={handleDrop}>
