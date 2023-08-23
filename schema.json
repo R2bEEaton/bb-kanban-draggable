@@ -16,7 +16,7 @@
     "settings": [
       {
         "type": "dataProvider",
-        "label": "Provider",
+        "label": "Provider2",
         "key": "dataProvider",
         "required": true
       }
