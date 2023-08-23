@@ -95,13 +95,13 @@
 <div on:drop={handleDrop}>
     <div class="spectrum-Table">
         <div class="spectrum-Table-head">
-            <div class="spectrum-Table-headCell">
-                <div class="title">
-                    {#each reactiveTableStatuses as status, index}
-                        {status.Title}
-                    {/each}
+            {#each Object.keys(reactiveTableStatuses[0]) as keyname}
+                <div class="spectrum-Table-headCell">
+                    <div class="title">
+                        {keyname}
+                    </div>
                 </div>
-            </div>
+            {/each}
             {#each reactiveTableStatuses as status, index}
                 <div
                         class="spectrum-Table-row"
@@ -113,9 +113,11 @@
                             dropIndex = null;
                         }}
                 >
-                    <div class="spectrum-Table-cell">
-                        {status.Title}
-                    </div>
+                    {#each status as statusItem}
+                        <div class="spectrum-Table-cell">
+                            {statusItem}
+                        </div>
+                    {/each}
                 </div>
             {/each}
         </div>
