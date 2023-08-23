@@ -114,7 +114,7 @@
                             dropIndex = null;
                         }}
                 >
-                    {#each status as value, index}
+                    {#each Object.values(status) as value, index}
                         <div class="spectrum-Table-cell">
                             {value}
                         </div>
