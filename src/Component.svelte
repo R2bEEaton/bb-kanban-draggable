@@ -18,6 +18,7 @@
             tableStatuses = data;
             if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
                 tableStatuses.sort((a, b) => a.Order - b.Order);
+                console.log("sorted");
             }
             console.log(tableStatuses);
         } catch (error) {
@@ -63,7 +64,9 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            refreshColumns(tableStatuses);
+            console.log("First" + reactiveTableStatuses);
+            console.log("Second" + tableStatuses);
+            refreshColumns(reactiveTableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
