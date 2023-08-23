@@ -15,8 +15,14 @@
     },
     "settings": [
       {
+        "type": "text",
+        "label": "Title",
+        "key": "componentTitle",
+        "required": true
+      },
+      {
         "type": "dataProvider",
-        "label": "Provider2",
+        "label": "Provider",
         "key": "dataProvider",
         "required": true
       }

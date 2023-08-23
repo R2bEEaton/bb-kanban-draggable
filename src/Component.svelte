@@ -5,6 +5,7 @@
 
     const { API, notificationStore } = getContext('sdk');
 
+    export let componentTitle;
     export let dataProvider;
     let dragIndex = null;
     let dropIndex = null;
@@ -98,12 +99,7 @@
         <div class="spectrum-Table-head">
             <div class="spectrum-Table-headCell">
                 <div class="title">
-                    Title
-                </div>
-            </div>
-            <div class="spectrum-Table-headCell">
-                <div class="title">
-                    Order
+                    {componentTitle}
                 </div>
             </div>
         </div>
@@ -119,10 +115,7 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {status.Title}
-                </div>
-                <div class="spectrum-Table-cell">
-                    {status.Order}
+                    {status.Title} {status.Order}
                 </div>
             </div>
         {/each}
