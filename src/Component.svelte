@@ -64,8 +64,8 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            console.log("First" + reactiveTableStatuses);
-            console.log("Second" + tableStatuses);
+            console.log("First " + reactiveTableStatuses);
+            console.log("Second " + tableStatuses);
             refreshColumns(reactiveTableStatuses);
             reactiveTableStatuses = tableStatuses;
         }
