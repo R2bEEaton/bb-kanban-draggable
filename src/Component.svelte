@@ -61,7 +61,7 @@
                 0,
                 tableStatuses.splice(dragIndex, 1)[0]
             );
-            refreshColumns(tableStatuses);
+            refreshColumns(reactiveTableStatuses.detail);
             reactiveTableStatuses = tableStatuses;
         }
         dragIndex = null;
