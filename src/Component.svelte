@@ -113,11 +113,9 @@
                             dropIndex = null;
                         }}
                 >
-                    {#each status as statusItem}
-                        <div class="spectrum-Table-cell">
-                            {statusItem}
-                        </div>
-                    {/each}
+                    <div class="spectrum-Table-cell">
+                        {status.Title}
+                    </div>
                 </div>
             {/each}
         </div>
