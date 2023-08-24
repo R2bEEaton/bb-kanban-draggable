@@ -30,13 +30,21 @@
         "type": "field",
         "label": "Label column",
         "key": "labelColumn",
-        "required": true
+        "required": true,
+        "dependsOn": {
+          "setting": "dataProvider",
+          "value": "provider"
+        }
       },
       {
         "type": "field",
         "label": "Order column",
         "key": "orderColumn",
-        "required": true
+        "required": true,
+        "dependsOn": {
+          "setting": "dataProvider",
+          "value": "provider"
+        }
       }
     ]
   }
