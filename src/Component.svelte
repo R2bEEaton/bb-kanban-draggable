@@ -21,9 +21,7 @@
             if (tableStatuses.length > 0) {
                 tableStatuses.sort((a, b) => a[orderColumn] - b[orderColumn]);
             }
-            if (sortOrder === "Descending") {
-                tableStatuses.reverse();
-            }
+            if (sortOrder === "Descending") tableStatuses.reverse();
         } catch (error) {
             console.log("SOME ERROR");
         }
@@ -58,7 +56,6 @@
                 `Your list has been successfully rearranged.`
             );
             await fetchTables();
-            console.log(labelColumn, orderColumn);
         } catch (error) {
         }
     }
@@ -97,7 +94,7 @@
                 fetchTables();
             })
             .catch(function (err) {
-                console.log(err); // logging the error to the console.
+                console.log(err);
             });
     });
 </script>
