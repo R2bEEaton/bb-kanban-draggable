@@ -1,12 +1,14 @@
 <script>
-    import { getContext, createEventDispatcher, onMount } from 'svelte';
-
-    const dispatch = createEventDispatcher();
+    import {getContext, onMount} from 'svelte';
 
     const { API, notificationStore } = getContext('sdk');
 
-    export let componentTitle;
+    export let componentTitle = "";
     export let dataProvider;
+    export let labelColumn;
+    export let orderColumn;
+    export let sortOrder;
+    export let showOrder = true;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
@@ -15,10 +17,9 @@
 
     async function fetchTables() {
         try {
-            const data = await API.fetchTableData(statusTableId);
-            tableStatuses = data;
-            if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
-                tableStatuses.sort((a, b) => b.Order - a.Order);
+            tableStatuses = await API.fetchTableData(statusTableId);
+            if (tableStatuses.length > 0) {
+                tableStatuses.sort((a, b) => b[orderColumn] - a[orderColumn]);
             }
         } catch (error) {
             console.log("SOME ERROR");
@@ -26,8 +27,8 @@
     }
 
     function handleDragStart(event, index) {
-      event.dataTransfer.effectAllowed = 'move';
-      dragIndex = index;
+        event.dataTransfer.effectAllowed = 'move';
+        dragIndex = index;
     }
     function handleDragOver(event, index) {
         event.preventDefault();
@@ -37,11 +38,14 @@
 
     async function refreshColumns(input) {
         try {
-            const promises = input.slice().reverse().map((status, index) => {
-                return API.saveRow({
-                    ...status,
-                    Order: index + 1,
-                }).catch((error) => {
+            let inputCopy = input.slice();
+            if (sortOrder === "Descending") inputCopy.reverse();
+            const promises = inputCopy.map((status, index) => {
+                let data = {
+                    ...status
+                };
+                data[orderColumn] = index + 1;
+                return API.saveRow(data).catch((error) => {
                     console.error(error);
                 });
             });
@@ -51,6 +55,7 @@
                 `Your list has been successfully rearranged.`
             );
             await fetchTables();
+            console.log(labelColumn, orderColumn);
         } catch (error) {
         }
     }
@@ -96,13 +101,15 @@
 
 <div on:drop={handleDrop}>
     <div class="spectrum-Table">
-        <div class="spectrum-Table-head">
-            <div class="spectrum-Table-headCell">
-                <div class="title">
-                    {componentTitle}
+        {#if componentTitle.length !== 0 }
+            <div class="spectrum-Table-head">
+                <div class="spectrum-Table-headCell">
+                    <div class="title">
+                        {componentTitle}
+                    </div>
                 </div>
             </div>
-        </div>
+        {/if}
         {#each reactiveTableStatuses as status, index}
             <div
                     class="spectrum-Table-row"
@@ -115,22 +122,9 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {status.Order} - {status.Title}
+                    {#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}
                 </div>
             </div>
         {/each}
     </div>
 </div>
-
-<style>
-    .status-item {
-        display: block!important;
-        height: auto;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: var(--spectrum-textfield-m-background-color, var(--spectrum-global-color-gray-50));
-        border-color: var(--spectrum-textfield-m-border-color, var(--spectrum-alias-border-color));
-        color: var(--spectrum-textfield-m-text-color, var(--spectrum-alias-text-color));
-        cursor: pointer;
-    }
-</style>
