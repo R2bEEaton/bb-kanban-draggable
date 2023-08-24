@@ -37,6 +37,12 @@
         "label": "Order column",
         "key": "orderColumn",
         "required": true
+      },
+      {
+        "type": "boolean",
+        "label": "Show Order in List",
+        "key": "showOrder",
+        "defaultValue": true
       }
     ]
   }
