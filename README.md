@@ -1,42 +1,27 @@
-# Bb-kanban-draggable
-This is the read me for the Kanban draggable plugin.
+# BB-List-Draggable
+This is the read me for the draggable/sortable list plugin.
 
 # Description
-With this plugin you are able to create and delete tickets, Create and delete columns and manage ticket states.
+With this plugin you are able to order a list by dragging the different elements around in the browser.
 
 ## Features
-* Creation of new columns
-* Drag cards between columns, quickly progress them through the pipeline
-* Filtering of the cards within the columns. Filtering works off Title and Description
-* Card creation with a single click
-* Deleting columns, creates a Backlog row automatically and moves all cards into it.
-* Specific card deleting on a single click.
-* Total number of columns 
-* Total number of cards within each column visible
-* Reordering functionality of the columns.
+* Reorder a list by dragging
+* Higher priority on top
 
 ## Instructions
 * Create a table with the following fields.
-    * **Title** make sure the toggle `use as table display column` is on
-    * **Description**
-    * **Image** - Optional field not required
-
-* Create an additional table with the following fields - this table is for the column headings and linking cards to their stage in the pipeline.
-    * **Title** make sure the toggle `use as table display column` is on
-    * Relationship link between the Card/Ticket and the State table - (one State to many Cards/Tickets.)
+    * **Title**
+    * **Order**
+    * You can add as many other fields as you want, but the first two are required because they work directly with the functionality of the plugin.
 
     ### Additional Notes
-    * There is ordering functionality for the columns.
-        * You will need to add an Order column for the State table, this column should be a Number field.
-        * Make sure that these are incremented by 1 as the inbuilt functionality works in this way.
-        * Optionally you can create the columns purely through the frontend and it will increment everything on its own.
+    * Rows with a higher Order will be at the top of the list.
+    * Make sure that Order is a unique integer as the sorting depends on it.
+    * To add a row to the list, I would recommend first performing a query to get the highest value in Order and setting the new row to that + 1. This means new rows will show up at the top of the list. Otherwise, the ordering may break.
 
 ## Demo
-![Kanban Demo](https://user-images.githubusercontent.com/126772285/234514184-a4913b9e-4539-4a1a-a8a0-a659906d7260.gif)
+![list-draggable-demo](https://github.com/R2bEEaton/bb-kanban-draggable/assets/34921506/54985b26-7b91-4b18-8f24-4f8fe4e38292)
 
 ## Disclaimer
-* Live loading when interacting with other Budibase components hasn't been built in. This means that sidepanel/formblock amends will need a page refresh in order to see the changes.
-
-## App export
-* An example app export with everything setup can be found here;
-[kanban-export-1691144265536.tar.gz](https://github.com/ConorWebb96/bb-kanban-draggable/files/12259729/kanban-export-1691144265536.tar.gz)
+* Most of this plugin was copied/modified from the column reordering capability of @ConorWebb96's [Kanban plugin](https://github.com/ConorWebb96/bb-kanban-draggable/blob/main/src/components/ColumnsSort.svelte)
+* I initially wanted to make the sorting work directly in a table, but I feel that this is better. You can display the sorted data with a table and have a "reorder" button that opens a sidebar with the Draggable List element. Then, use an [Interval](https://github.com/MartinPicc/budibase-interval-plugin) (one of my favorite plugins) to refresh a dataprovider on the table periodically. If you use an external database, you can get away with refreshing pretty often.
