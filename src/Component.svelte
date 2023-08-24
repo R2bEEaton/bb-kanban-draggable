@@ -115,7 +115,7 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {status.Title}
+                    {status.Order} - {status.Title}
                 </div>
             </div>
         {/each}
