@@ -8,6 +8,7 @@
     export let labelColumn;
     export let orderColumn;
     export let sortOrder = "Descending";
+    $: sortOrder, fetchTables();
     export let showOrder = true;
     let dragIndex = null;
     let dropIndex = null;
