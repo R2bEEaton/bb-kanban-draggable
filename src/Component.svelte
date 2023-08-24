@@ -1,10 +1,12 @@
 <script>
-    import { getContext, onMount } from 'svelte';
+    import {getContext, onMount} from 'svelte';
 
     const { API, notificationStore } = getContext('sdk');
 
     export let componentTitle;
     export let dataProvider;
+    export let labelColumn;
+    export let orderColumn;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
@@ -13,8 +15,7 @@
 
     async function fetchTables() {
         try {
-            const data = await API.fetchTableData(statusTableId);
-            tableStatuses = data;
+            tableStatuses = await API.fetchTableData(statusTableId);
             if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
                 tableStatuses.sort((a, b) => b.Order - a.Order);
             }
@@ -49,6 +50,7 @@
                 `Your list has been successfully rearranged.`
             );
             await fetchTables();
+            console.log(labelColumn, orderColumn);
         } catch (error) {
         }
     }
@@ -94,13 +96,15 @@
 
 <div on:drop={handleDrop}>
     <div class="spectrum-Table">
-        <div class="spectrum-Table-head">
-            <div class="spectrum-Table-headCell">
-                <div class="title">
-                    {componentTitle}
+        {#if componentTitle.length !== 0 }
+            <div class="spectrum-Table-head">
+                <div class="spectrum-Table-headCell">
+                    <div class="title">
+                        {componentTitle}
+                    </div>
                 </div>
             </div>
-        </div>
+        {/if}
         {#each reactiveTableStatuses as status, index}
             <div
                     class="spectrum-Table-row"
@@ -119,16 +123,3 @@
         {/each}
     </div>
 </div>
-
-<style>
-    .status-item {
-        display: block!important;
-        height: auto;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: var(--spectrum-textfield-m-background-color, var(--spectrum-global-color-gray-50));
-        border-color: var(--spectrum-textfield-m-border-color, var(--spectrum-alias-border-color));
-        color: var(--spectrum-textfield-m-text-color, var(--spectrum-alias-text-color));
-        cursor: pointer;
-    }
-</style>
