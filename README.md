@@ -1,41 +1,27 @@
-# Bb-kanban-draggable
-This is the read me for the Kanban draggable plugin.
+# Bb-list-draggable
+This is the read me for the draggable/sortable list plugin.
 
 # Description
-With this plugin you are able to create and delete tickets, Create and delete columns and manage ticket states.
+With this plugin you are able to order a list by dragging the different elements around in the browser.
 
 ## Features
-* Creation of new columns
-* Drag cards between columns, quickly progress them through the pipeline
-* Filtering of the cards within the columns. Filtering works off Title and Description
-* Card creation with a single click
-* Deleting columns, creates a Backlog row automatically and moves all cards into it.
-* Specific card deleting on a single click.
-* Total number of columns 
-* Total number of cards within each column visible
-* Reordering functionality of the columns.
+* Reorder a list by dragging
+* Higher priority on top
 
 ## Instructions
 * Create a table with the following fields.
-    * **Title** make sure the toggle `use as table display column` is on
-    * **Description**
-    * **Image** - Optional field not required
-
-* Create an additional table with the following fields - this table is for the column headings and linking cards to their stage in the pipeline.
-    * **Title** make sure the toggle `use as table display column` is on
-    * Relationship link between the Card/Ticket and the State table - (one State to many Cards/Tickets.)
+    * **Title**
+    * **Order**
 
     ### Additional Notes
-    * There is ordering functionality for the columns.
-        * You will need to add an Order column for the State table, this column should be a Number field.
-        * Make sure that these are incremented by 1 as the inbuilt functionality works in this way.
-        * Optionally you can create the columns purely through the frontend and it will increment everything on its own.
+    * Rows with a higher Order will be at the top of the list.
+    * Make sure that Order is a unique integer as the sorting depends on it.
 
 ## Demo
-![Kanban Demo](https://user-images.githubusercontent.com/126772285/234514184-a4913b9e-4539-4a1a-a8a0-a659906d7260.gif)
+
 
 ## Disclaimer
-* Live loading when interacting with other Budibase components hasn't been built in. This means that sidepanel/formblock amends will need a page refresh in order to see the changes.
+* Most of this plugin was forked from the column reordering capability of @ConorWebb96 's [Kanban plugin](https://github.com/ConorWebb96/bb-kanban-draggable/blob/main/src/components/ColumnsSort.svelte)
 
 ## App export
 * An example app export with everything setup can be found here;
