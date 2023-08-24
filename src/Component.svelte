@@ -7,7 +7,6 @@
     export let dataProvider;
     export let labelColumn;
     export let orderColumn;
-    export let showOrder;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
@@ -38,11 +37,10 @@
     async function refreshColumns(input) {
         try {
             const promises = input.slice().reverse().map((status, index) => {
-                let data = {
-                    ...status
-                };
-                data[orderColumn] = index + 1;
-                return API.saveRow(data).catch((error) => {
+                return API.saveRow({
+                    ...status,
+                    Order: index + 1,
+                }).catch((error) => {
                     console.error(error);
                 });
             });
@@ -119,7 +117,7 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}
+                    {status.Order} - {status.Title}
                 </div>
             </div>
         {/each}
