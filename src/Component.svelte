@@ -7,7 +7,7 @@
     export let dataProvider;
     export let labelColumn;
     export let orderColumn;
-    export let sortOrder;
+    export let sortOrder = "Descending";
     export let showOrder = true;
     let dragIndex = null;
     let dropIndex = null;
@@ -19,7 +19,10 @@
         try {
             tableStatuses = await API.fetchTableData(statusTableId);
             if (tableStatuses.length > 0) {
-                tableStatuses.sort((a, b) => b[orderColumn] - a[orderColumn]);
+                tableStatuses.sort((a, b) => a[orderColumn] - b[orderColumn]);
+            }
+            if (sortOrder === "Descending") {
+                tableStatuses.reverse();
             }
         } catch (error) {
             console.log("SOME ERROR");
