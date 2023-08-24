@@ -10,14 +10,15 @@ With this plugin you are able to order a list by dragging the different elements
 
 ## Instructions
 * Create a table with the following fields.
-    * **Title**
-    * **Order**
-    * You can add as many other fields as you want, but the first two are required because they work directly with the functionality of the plugin.
+    * A label field, which can be named whatever you want
+    * An order field, which must be numeric and can be named whatever you want
+    * Choose the label and order field as appropriate from the element's settings
+    * The table can have any additional fields, but at least the first two are required
 
     ### Additional Notes
-    * Rows with a higher Order will be at the top of the list.
-    * Make sure that Order is a unique integer as the sorting depends on it.
-    * To add a row to the list, I would recommend first performing a query to get the highest value in Order and setting the new row to that + 1. This means new rows will show up at the top of the list. Otherwise, the ordering may break.
+    * Change the sort direction via the settings
+    * Make sure that the order column contains unique integers as the sorting depends on it
+    * To add a row to the list, I would recommend first performing a query to get the highest value in the order column and setting the new row to that + 1. This means new rows will show up at one end of the list, depending on how you have it sorted. Otherwise, the ordering may break.
 
 ## Demo
 ![list-draggable-demo](https://github.com/R2bEEaton/bb-kanban-draggable/assets/34921506/54985b26-7b91-4b18-8f24-4f8fe4e38292)

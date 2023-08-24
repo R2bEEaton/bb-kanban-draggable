@@ -18,13 +18,38 @@
         "type": "text",
         "label": "Title",
         "key": "componentTitle",
-        "required": true
+        "required": false
       },
       {
         "type": "dataProvider",
         "label": "Provider",
         "key": "dataProvider",
         "required": true
+      },
+      {
+        "type": "field",
+        "label": "Label column",
+        "key": "labelColumn",
+        "required": true
+      },
+      {
+        "type": "field",
+        "label": "Order column (numeric)",
+        "key": "orderColumn",
+        "required": true
+      },
+      {
+        "type": "select",
+        "label": "Sort order",
+        "key": "sortOrder",
+        "options": ["Ascending", "Descending"],
+        "defaultValue": "Descending"
+      },
+      {
+        "type": "boolean",
+        "label": "Show Order in List",
+        "key": "showOrder",
+        "defaultValue": true
       }
     ]
   }
