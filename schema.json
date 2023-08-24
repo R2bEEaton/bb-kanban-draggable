@@ -5,7 +5,7 @@
     "name": "bb-list-draggable",
     "friendlyName": "Draggable List",
     "description": "A draggable list that allows for on-the-fly reordering.",
-    "icon": "ViewColumn",
+    "icon": "ViewRow",
     "draggable": false,
     "features": {
       "state": true,
