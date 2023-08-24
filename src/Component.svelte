@@ -3,11 +3,11 @@
 
     const { API, notificationStore } = getContext('sdk');
 
-    export let componentTitle;
+    export let componentTitle = "";
     export let dataProvider;
     export let labelColumn;
     export let orderColumn;
-    export let showOrder;
+    export let showOrder = true;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
@@ -17,8 +17,8 @@
     async function fetchTables() {
         try {
             tableStatuses = await API.fetchTableData(statusTableId);
-            if (tableStatuses.length > 0 && tableStatuses[0].hasOwnProperty('Order')) {
-                tableStatuses.sort((a, b) => b.Order - a.Order);
+            if (tableStatuses.length > 0) {
+                tableStatuses.sort((a, b) => b[orderColumn] - a[orderColumn]);
             }
         } catch (error) {
             console.log("SOME ERROR");

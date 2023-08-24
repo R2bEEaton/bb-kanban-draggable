@@ -34,7 +34,7 @@
       },
       {
         "type": "field",
-        "label": "Order column",
+        "label": "Order column (numeric)",
         "key": "orderColumn",
         "required": true
       },
