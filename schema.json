@@ -18,33 +18,13 @@
         "type": "text",
         "label": "Title",
         "key": "componentTitle",
-        "required": false
+        "required": true
       },
       {
         "type": "dataProvider",
         "label": "Provider",
         "key": "dataProvider",
         "required": true
-      },
-      {
-        "type": "field",
-        "label": "Label column",
-        "key": "labelColumn",
-        "required": true,
-        "dependsOn": {
-          "setting": "dataProvider",
-          "value": "provider"
-        }
-      },
-      {
-        "type": "field",
-        "label": "Order column",
-        "key": "orderColumn",
-        "required": true,
-        "dependsOn": {
-          "setting": "dataProvider",
-          "value": "provider"
-        }
       }
     ]
   }

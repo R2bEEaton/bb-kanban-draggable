@@ -1,5 +1,7 @@
 <script>
-    import { getContext, onMount } from 'svelte';
+    import { getContext, createEventDispatcher, onMount } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     const { API, notificationStore } = getContext('sdk');
 
