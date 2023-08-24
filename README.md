@@ -1,4 +1,4 @@
-# Bb-list-draggable
+# BB-List-Draggable
 This is the read me for the draggable/sortable list plugin.
 
 # Description
@@ -17,6 +17,7 @@ With this plugin you are able to order a list by dragging the different elements
     ### Additional Notes
     * Rows with a higher Order will be at the top of the list.
     * Make sure that Order is a unique integer as the sorting depends on it.
+    * To add a row to the list, I would recommend first performing a query to get the highest value in Order and setting the new row to that + 1. This means new rows will show up at the top of the list. Otherwise, the ordering may break.
 
 ## Demo
 ![list-draggable-demo](https://github.com/R2bEEaton/bb-kanban-draggable/assets/34921506/54985b26-7b91-4b18-8f24-4f8fe4e38292)
