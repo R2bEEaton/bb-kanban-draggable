@@ -1,6 +1,6 @@
 <script>
     import {getContext, onMount} from 'svelte';
-    import ProgressCircle from "./ProgressCircle/Popover.svelte"
+    import ProgressCircle from "../lib/ProgressCircle/Popover.svelte"
     import CellRenderer from "./Table/CellRenderer.svelte"
 
     const { API, notificationStore } = getContext('sdk');
