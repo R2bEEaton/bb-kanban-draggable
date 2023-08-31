@@ -1,5 +1,7 @@
 <script>
     import {getContext, onMount} from 'svelte';
+    import ProgressCircle from "../ProgressCircle/ProgressCircle.svelte"
+    import CellRenderer from "./CellRenderer.svelte"
 
     const { API, notificationStore } = getContext('sdk');
 
@@ -10,6 +12,7 @@
     export let sortOrder = "Descending";
     $: sortOrder, fetchTables();
     export let showOrder = true;
+    export let loading = false;
     let dragIndex = null;
     let dropIndex = null;
     let tableStatuses = [];
@@ -98,34 +101,88 @@
                 console.log(err);
             });
     });
+
+    const headerHeight = 36;
+    const rowHeight = 46;
+    $: totalRowCount = tableStatuses.length;
+    $: rowCount = tableStatuses.length;
+    $: visibleRowCount = tableStatuses.length;
+
+    $: heightStyle = getHeightStyle(
+        visibleRowCount,
+        rowCount,
+        totalRowCount,
+        rowHeight,
+        loading
+    )
+
+    $: gridStyle = getGridStyle(2);
+    const getHeightStyle = (
+        visibleRowCount,
+        rowCount,
+        totalRowCount,
+        rowHeight,
+        loading
+    ) => {
+        if (loading) {
+            return `height: ${headerHeight + visibleRowCount * rowHeight}px;`
+        }
+        if (!rowCount || !visibleRowCount || totalRowCount <= rowCount) {
+            return ""
+        }
+        return `height: ${headerHeight + visibleRowCount * rowHeight}px;`
+    }
+
+    const getGridStyle = (fields) => {
+        let style = "grid-template-columns:"
+        for (let i = 0; i < fields; i++) style += " minmax(auto, 1fr)";
+        style += ";"
+        return style
+    }
 </script>
 
-<div on:drop={handleDrop}>
-    <div class="spectrum-Table">
-        {#if componentTitle.length !== 0 }
-            <div class="spectrum-Table-head">
-                <div class="spectrum-Table-headCell">
-                    <div class="title">
-                        {componentTitle}
+<div class="wrapper" style={`--row-height: ${rowHeight}px; --header-height: ${headerHeight}px;`} on:drop={handleDrop}>
+    {#if loading}
+        <div class="loading" style={getHeightStyle()}>
+            <slot name="loadingIndicator">
+                <ProgressCircle />
+            </slot>
+        </div>
+    {:else}
+        <div class="spectrum-Table" class:no-scroll={!rowCount} style={`${heightStyle}${gridStyle}`}>
+            {#if componentTitle.length !== 0 }
+                <div class="spectrum-Table-head">
+                    <div class="spectrum-Table-headCell">
+                        <div class="title">{componentTitle}</div>
                     </div>
                 </div>
-            </div>
-        {/if}
-        {#each reactiveTableStatuses as status, index}
-            <div
-                    class="spectrum-Table-row"
-                    draggable="true"
-                    on:dragstart={(event) => handleDragStart(event, index)}
-                    on:dragover={(event) => handleDragOver(event, index)}
-                    on:dragend={() => {
-                        dragIndex = null;
-                        dropIndex = null;
-                    }}
-            >
-                <div class="spectrum-Table-cell">
-                    {#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}
+            {/if}
+            {#each reactiveTableStatuses as row, index}
+                <div
+                        class="spectrum-Table-row"
+                        draggable="true"
+                        on:dragstart={(event) => handleDragStart(event, index)}
+                        on:dragover={(event) => handleDragOver(event, index)}
+                        on:dragend={() => {
+                            dragIndex = null;
+                            dropIndex = null;
+                        }}
+                >
+                    <div class="spectrum-Table-cell">
+                        <div class="spectrum-Table-cell">
+                            <CellRenderer
+                                    {row}
+                                    value={row[labelColumn]}
+                                    on:clickrelationship
+                                    on:buttonclick
+                            >
+                                <slot />
+                            </CellRenderer>
+                        </div>
+                        <!--{#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}-->
+                    </div>
                 </div>
-            </div>
-        {/each}
-    </div>
+            {/each}
+        </div>
+    {/if}
 </div>
