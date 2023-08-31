@@ -169,13 +169,13 @@
                 >
                     <div class="spectrum-Table-cell">
                         <div class="spectrum-Table-cell">
-                            <div>{row[labelColumn]}</div>
+                            <div style="--max-cell-width: 200px;">{row[labelColumn]}</div>
                         </div>
                         <!--{#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}-->
                     </div>
                     <div class="spectrum-Table-cell">
                         <div class="spectrum-Table-cell">
-                            <div>{row[orderColumn]}</div>
+                            <div style="--max-cell-width: 200px;">{row[orderColumn]}</div>
                         </div>
                         <!--{#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}-->
                     </div>
