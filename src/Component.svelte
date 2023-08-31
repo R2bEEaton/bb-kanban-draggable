@@ -172,6 +172,19 @@
                         <div class="spectrum-Table-cell">
                             <CellRenderer
                                     {row}
+                                    value={row[orderColumn]}
+                                    on:clickrelationship
+                                    on:buttonclick
+                            >
+                                <slot />
+                            </CellRenderer>
+                        </div>
+                        <!--{#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}-->
+                    </div>
+                    <div class="spectrum-Table-cell">
+                        <div class="spectrum-Table-cell">
+                            <CellRenderer
+                                    {row}
                                     value={row[labelColumn]}
                                     on:clickrelationship
                                     on:buttonclick
