@@ -111,7 +111,7 @@
                 </div>
             </div>
         {/if}
-        {#each reactiveTableStatuses as status, index}
+        {#each reactiveTableStatuses as row, index}
             <div
                     class="spectrum-Table-row"
                     draggable="true"
@@ -123,7 +123,7 @@
                     }}
             >
                 <div class="spectrum-Table-cell">
-                    {#if showOrder === true}{status[orderColumn]} - {/if}{status[labelColumn]}
+                    {#if showOrder === true}{row[orderColumn]} - {/if}{row[labelColumn]}
                 </div>
             </div>
         {/each}
