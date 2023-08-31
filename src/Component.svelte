@@ -1,7 +1,7 @@
 <script>
     import {getContext, onMount} from 'svelte';
-    import ProgressCircle from "../ProgressCircle/ProgressCircle.svelte"
-    import CellRenderer from "../Table/CellRenderer.svelte"
+    import ProgressCircle from "../../node_modules/@budibase/bbui/src/ProgressCircle/Popover.svelte"
+    import CellRenderer from "../../node_modules/@budibase/bbui/src/Table/CellRenderer.svelte"
 
     const { API, notificationStore } = getContext('sdk');
 
