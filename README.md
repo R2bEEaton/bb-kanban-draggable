@@ -6,7 +6,6 @@ With this plugin you are able to order a list by dragging the different elements
 
 ## Features
 * Reorder a list by dragging
-* Higher priority on top
 
 ## Instructions
 * Create a table with the following fields.
